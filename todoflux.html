@@ -1,0 +1,56 @@
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Meteor • TodoFlux</title>
+</head>
+
+<body>
+	<section id="todoapp" data-framework="meteor">
+        {{> todoapp}}	
+	</section>
+	<footer id="info">
+		<p>Double-click to edit a todo</p>
+		<p>Created by Luis Herranz</p>
+		<p><a href="http://todoflux.meteor.com">Meteor TodoFlux</a></p>
+		<p>Not part of <a href="http://todomvc.com">TodoMVC</a></p>
+	</footer>
+</body>
+
+<template name="todoapp">
+	<header id="header">
+		<h1>todos</h1>
+		<input id="new-todo" placeholder="What needs to be done?" autofocus>
+	</header>
+    {{#if todos}}
+		{{> main}}
+        {{> footer}}
+	{{/if}}
+</template>
+
+<template name="main">
+	<section id="main">
+		<ul id="todo-list">
+			{{#each todos}}
+				{{> todo}}
+			{{/each}}
+		</ul>
+	</section>
+</template>
+
+<template name="todo">
+	<li class="{{#if completed}}completed{{/if}}{{#if editing}}editing{{/if}}">
+		<div class="view">
+			<input class="toggle" type="checkbox" checked="{{#if completed}}checked{{/if}}">
+			<label>{{title}}</label>
+			<button class="destroy"></button>
+		</div>
+		<input class="edit {{_id}}" value="{{title}}">
+	</li>
+</template>
+
+<template name="footer">
+	<footer id="footer">
+		<span id="todo-count"><strong>{{todos_not_completed}}</strong> items left</span>
+		<button id="clear-completed">Clear completed ({{todos_completed}})</button>
+	</footer>
+</template>
