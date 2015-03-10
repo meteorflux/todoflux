@@ -160,11 +160,13 @@ TodoStore = {
         Todos.remove(id);
     },
     destroyCompleted: function() {
-        Meteor.methods({
-            'Todos.removeAll': function(){
-                Todos.remove({completed:true});
-            }
-        });
-        Meteor.call('Todos.removeAll');
+        Meteor.call('TodoStore.destroyCompleted');
     }
 };
+
+// TodoStore Meteor Methods (this needs to be done in the server)
+Meteor.methods({
+    'TodoStore.destroyCompleted': function(){
+        Todos.remove({completed:true});
+    }
+});
