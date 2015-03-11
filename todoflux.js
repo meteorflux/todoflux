@@ -126,7 +126,7 @@ Dispatcher.register(function(payload){
       break;
 
     case "TODO_DESTROY_COMPLETED":
-      TodoStore.destroyCompleted();
+      Meteor.call('TodoStore.destroyCompleted');
       break;
 
     default:
@@ -158,9 +158,6 @@ TodoStore = {
   },
   destroy: function(id) {
     Todos.remove(id);
-  },
-  destroyCompleted: function() {
-    Meteor.call('TodoStore.destroyCompleted');
   }
 };
 
